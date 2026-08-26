@@ -36,6 +36,32 @@ curl -X POST ^
   http://localhost:8080
 ```
 
+## Building locally
+
+```
+dotnet publish -c Release -r win-x64
+```
+
+The output will be at `bin/Release/net9.0/win-x64/publish/bash2cmd.exe` (~868 KB standalone, no .NET runtime needed).
+
+## CI/CD - Automated Releases
+
+This project uses GitHub Actions to automatically build and release the NativeAOT binary.
+
+**How it works:**
+- A push of a version tag (e.g., `v1.0.0`) triggers the workflow
+- It builds the NativeAOT executable on Windows
+- Creates a GitHub Release with the `bash2cmd.exe` attached
+
+**To trigger a new release:**
+```
+git tag v1.0.0
+git push origin v1.0.0
+```
+
+The release will appear at: https://github.com/PedroArSP/bash2cmd/releases
+
 ## Requirements
 
-- .NET 9 SDK
+- .NET 9 SDK (for development/local build only)
+- No runtime needed to run the published exe
