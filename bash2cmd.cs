@@ -1,10 +1,13 @@
 using System;
+using System.Reflection;
 using System.Text;
 
 // Show instructions if running interactively (not piped)
 if (Console.IsInputRedirected == false)
 {
-    Console.Error.WriteLine("bash2cmd - Converts multiline bash commands to Windows CMD format.");
+    var version = Assembly.GetExecutingAssembly()
+        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion ?? "unknown";
+    Console.Error.WriteLine($"bash2cmd v{version} - Converts multiline bash commands to Windows CMD format.");
     Console.Error.WriteLine("Paste your bash command, then press Ctrl+Z (Windows) or Ctrl+D (Linux) to convert.");
     Console.Error.WriteLine();
 }
